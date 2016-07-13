@@ -28,25 +28,32 @@ function __autoload($className)
     }
 }
 
-$request = New Request();
-$route = $request->get('route');
+try {
 
-if (is_null($route)){
-    $route = 'index/index';
+    $request = New Request();
+    $route = $request->get('route');
+
+    if (is_null($route)) {
+        $route = 'index/index';
+    }
+
+    $route = explode('/', $route);
+
+    $controller = ucfirst($route[0] . 'Controller');
+    $action = $route[1] . 'Action';
+
+    $controller = new $controller;
+
+    if (!method_exists($controller, $action)) {
+        throw New ErrorException("{$action} not found");
+    }
+
+    $content = $controller->$action($request);
+} catch (ErrorException $e){
+    $content = $e->getMessage();
+} catch (Exception $e){
+    die('Bad error');
 }
-
-$route = explode('/', $route);
-
-$controller = ucfirst($route[0] . 'Controller');
-$action = $route[1] . 'Action';
-
-$controller = new $controller;
-
-if (!method_exists($controller, $action)){
-    die("{$action} not found");
-}
-
-$content = $controller->$action($request);
 
 require VIEW_DIR . 'default_layout.phtml';
 
