@@ -29,7 +29,6 @@ function __autoload($className)
 }
 
 try {
-
     $request = New Request();
     $route = $request->get('route');
 
@@ -45,14 +44,16 @@ try {
     $controller = new $controller;
 
     if (!method_exists($controller, $action)) {
-        throw New ErrorException("{$action} not found");
+        throw New Exception("{$action} not found, 500");
     }
 
     $content = $controller->$action($request);
-} catch (ErrorException $e){
-    $content = $e->getMessage();
+
+} catch (NotFoundException $e){
+    // you can make it different
+    $content = Controller::renderError($e->getMessage(), $e->getCode());
 } catch (Exception $e){
-    die('Bad error');
+    $content = Controller::renderError($e->getMessage(), $e->getCode());
 }
 
 require VIEW_DIR . 'default_layout.phtml';
