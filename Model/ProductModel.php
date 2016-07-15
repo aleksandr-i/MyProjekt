@@ -4,57 +4,36 @@ class ProductModel
 {
     public function findAll()
     {
-        return array(
-            array(
-                'id' => 1,
-                'title' => 'Dracula',
-                'author' => 'Stoker',
-                'price' => 666
-            ),
-            array(
-                'id' => 2,
-                'title' => 'Dream catcher',
-                'author' => 'King',
-                'price' => 243
-            ),
-            array(
-                'id' => 3,
-                'title' => 'Flowers for Eldzhernon',
-                'author' => 'Somepne',
-                'price' => 3423
-            ),
-        );
+        $db = DbConnection::getInstance()->getPdo();
+        $sth = $db->query('SELECT p.id, p. title, p.description, p.price, p.status, c.name AS category
+                          FROM product p JOIN category c ON p.category_id = c.id
+                          ORDER BY p.id ASC ');
+        $products = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!$products){
+            throw New NotFoundException ('Products not found');
+        }
+
+        return $products;
     }
 
     public function findId($id)
     {
-        $books = array(
-            array(
-                'id' => 1,
-                'title' => 'Dracula',
-                'author' => 'Stoker',
-                'price' => 666
-            ),
-            array(
-                'id' => 2,
-                'title' => 'Dream catcher',
-                'author' => 'King',
-                'price' => 243
-            ),
-            array(
-                'id' => 3,
-                'title' => 'Flowers for Eldzhernon',
-                'author' => 'Somepne',
-                'price' => 3423
-            ),
-        );
+        $db = DbConnection::getInstance()->getPdo();
+        $sth = $db->prepare('SELECT p.id, p. title, p.description, p.price, p.status, c.name AS category
+                            FROM product p JOIN category c ON p.category_id = c.id
+                            WHERE p.id = :number');
 
-        foreach ($books as $book) {
-            if ($book['id'] == $id) {
-                return $book;
-            }
+        $sth->execute(array(
+            'number' => $id
+        ));
+
+        $products = $sth->fetch(PDO::FETCH_ASSOC);
+
+        if (!$products) {
+            throw New NotFoundException ('Products not found');
         }
 
-        throw New NotFoundException('Book not found');
+        return $products;
     }
 }

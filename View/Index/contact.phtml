@@ -1,10 +1,13 @@
-<h1>Contact form</h1>
+<h1>CONTACT</h1>
+
+<div>Asperiores, itaque vero facere laudantium voluptas temporibus mollitia nisi deleniti illo minima quisquam corporis possimus nesciunt.</div>
+<br>
 
 
 <b><?=$flashMessage?></b>
 <form method="post">
-    Username: <input type="text" name="username" value="<?=$form->username?>"><br>
-    Email: <input type="email" name="email" value="<?=$form->email?>"><br>
-    <textarea name="message"><?=$form->message?></textarea>
-    <button>Go</button>
+    <input type="text" name="username" placeholder="Username" value="<?=$form->username?>"><br>
+    <input type="email" name="email" placeholder="Email" value="<?=$form->email?>"><br>
+    <textarea name="message" placeholder="Message"><?=$form->message?></textarea>
+    <button>SEND MESSAGE</button>
 </form>
