@@ -1,0 +1,8 @@
+<h1>LOGIN</h1>
+
+<?=Session::getFlash()?>
+<form method="post">
+    <input type="email" name="email" placeholder="Your email" value="<?=$form->email?>"><br>
+    <input type="password" name="password" placeholder="Your password"><br>
+    <button>SIGN IN</button>
+</form>

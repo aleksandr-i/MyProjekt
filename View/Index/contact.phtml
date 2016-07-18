@@ -4,7 +4,7 @@
 <br>
 
 
-<b><?=$flashMessage?></b>
+<b><?=Session::getFlash()?></b>
 <form method="post">
     <input type="text" name="username" placeholder="Username" value="<?=$form->username?>"><br>
     <input type="email" name="email" placeholder="Email" value="<?=$form->email?>"><br>

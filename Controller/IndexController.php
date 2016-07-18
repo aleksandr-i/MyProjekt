@@ -12,7 +12,6 @@ class IndexController extends Controller
     }
     public function contactAction(Request $request)
     {
-        $flashMessage = $request->get('flash'); // $_GET['flash']
         $form = new ContactForm($request);
                 
         if ($request->isPost()) {
@@ -21,6 +20,8 @@ class IndexController extends Controller
                 $datetime = (new DateTime())->format('Y-m-d H:i:s');
                 $ip_adress = $_SERVER['REMOTE_ADDR'];
 
+                //mail()
+
                 $feedbackModel->save(array(
                     'username' => $form->username,
                     'email' => $form->email,
@@ -28,16 +29,15 @@ class IndexController extends Controller
                     'created' => $datetime,
                     'ip_adress' => $ip_adress,
                 ));
-                $flashMessage = 'Success';
+                Session::setFlash('Success');
                 
                 // todo: function redirect($to)
-                Router::redirect('/index.php?route=index/contact&flash=' . $flashMessage);
+                Router::redirect('/index.php?route=index/contact');
             }
-            $flashMessage = 'Error';
+            Session::setFlash('Error');
         }
         $args = array(
             'form' => $form,
-            'flashMessage' => $flashMessage
         );
         return $this->render('contact', $args);
     }

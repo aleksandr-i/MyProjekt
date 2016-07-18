@@ -9,6 +9,12 @@
 <a href="#">Services</a>
 <a href="/index.php?route=product/index">Products</a>
 <a href="/index.php?route=index/contact">Contact</a>
+|
+<?php if (!Session::has('user')) : ?>
+    <a href="/index.php?route=security/login">Login</a>
+<?php else : ?>
+    <a href="/index.php?route=security/logout">Logout</a>
+<?php endif ?>
 <hr>
 <?=$content ?>
 <br>
