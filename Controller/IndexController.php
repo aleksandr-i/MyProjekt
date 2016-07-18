@@ -10,6 +10,7 @@ class IndexController extends Controller
         );
         return $this->render('index', $args);
     }
+
     public function contactAction(Request $request)
     {
         $form = new ContactForm($request);
@@ -36,9 +37,11 @@ class IndexController extends Controller
             }
             Session::setFlash('Error');
         }
+
         $args = array(
             'form' => $form,
         );
+        
         return $this->render('contact', $args);
     }
 }

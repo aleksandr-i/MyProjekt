@@ -17,7 +17,7 @@ class SecurityController extends Controller
                 }
                 
                 Session::setFlash('User not found');
-                Router::redirect('/index.php?route=secure/login');
+                Router::redirect('/index.php?route=security/login');
             } else {
                 Session::setFlash('Fill the fields');
             }
