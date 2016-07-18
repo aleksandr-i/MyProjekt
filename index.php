@@ -5,6 +5,7 @@ define('VIEW_DIR', ROOT . 'View' . DS);
 define('LIB_DIR', ROOT . 'Library' . DS);
 define('CONTROLLER_DIR', ROOT . 'Controller' . DS);
 define('MODEL_DIR', ROOT . 'Model' . DS);
+define('CONF_DIR', ROOT . 'Config' . DS);
 
 function __autoload($className)
 {
@@ -29,6 +30,7 @@ function __autoload($className)
 }
 
 try {
+    Config::setFromXML('db.xml');
     
     $request = New Request();
     $route = $request->get('route');

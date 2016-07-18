@@ -13,7 +13,8 @@ class DbConnection
 
     private function __construct()
     {
-        $this->pdo = New PDO('mysql: host=localhost; dbname=myproject_db', 'root');
+        $dsn = 'mysql: host=' . Config::get('host') . '; dbname='. Config::get('dbname'); // like:  mysql: host=localhost; dbnam=mvc1102
+        $this->pdo = new PDO($dsn, Config::get('user'), Config::get('pass'));
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
