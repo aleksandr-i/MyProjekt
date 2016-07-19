@@ -34,18 +34,14 @@ try {
 
     Config::setFromXML('db.xml');
     Config::setFromXML('main.xml');
+
+    Router::init('routes.php');
     
     $request = New Request();
-    $route = $request->get('route');
-
-    if (is_null($route)) {
-        $route = 'index/index';
-    }
-
-    $route = explode('/', $route);
-
-    $controller = ucfirst($route[0] . 'Controller');
-    $action = $route[1] . 'Action';
+    Router::match($request);
+    
+    $controller = Router::$controller;
+    $action = Router::$action;
 
     $controller = new $controller;
 
@@ -67,5 +63,5 @@ try {
 
 require VIEW_DIR . 'default_layout.phtml';
 
-echo '<hr>';
-var_dump($route);
+//echo '<hr>';
+//var_dump($route);

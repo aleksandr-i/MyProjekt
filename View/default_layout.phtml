@@ -7,13 +7,13 @@
 <body>
 <a href="/">Home</a>
 <a href="#">Services</a>
-<a href="/Webroot/index.php?route=product/index">Products</a>
-<a href="/Webroot/index.php?route=index/contact">Contact</a>
+<a href="/products">Products</a>
+<a href="/contact-us">Contact</a>
 |
 <?php if (!Session::has('user')) : ?>
-    <a href="/Webroot/index.php?route=security/login">Login</a>
+    <a href="/login">Login</a>
 <?php else : ?>
-    <a href="/Webroot/index.php?route=security/logout">Logout</a>
+    <a href="/logout">Logout</a>
 <?php endif ?>
 <hr>
 <?=$content ?>

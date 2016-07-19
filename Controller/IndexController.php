@@ -33,7 +33,7 @@ class IndexController extends Controller
                 Session::setFlash('Success');
                 
                 // todo: function redirect($to)
-                Router::redirect('/index.php?route=index/contact');
+                Router::redirect('/contact');
             }
             Session::setFlash('Error');
         }
