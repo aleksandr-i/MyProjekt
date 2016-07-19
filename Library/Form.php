@@ -24,7 +24,7 @@ abstract class Form
 
     public function isValid()
     {
-        $res = $this->username !== '' && $this->email !== '' && $this->message !== '';
+        $res = $this->username !== '' && $this->email !== '' && $this->message !== '' && $this->password !== '';
         return $res;
     }
 }
