@@ -7,6 +7,21 @@ class ProductModel
         $db = DbConnection::getInstance()->getPdo();
         $sth = $db->query('SELECT p.id, p. title, p.description, p.price, p.status, c.name AS category
                           FROM product p JOIN category c ON p.category_id = c.id
+                          WHERE status = 1 ORDER BY p.id ASC ');
+        $products = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!$products){
+            throw New NotFoundException ('Products not found');
+        }
+
+        return $products;
+    }
+
+    public function findAllAdmin()
+    {
+        $db = DbConnection::getInstance()->getPdo();
+        $sth = $db->query('SELECT p.id, p. title, p.description, p.price, p.status, c.name AS category
+                          FROM product p JOIN category c ON p.category_id = c.id
                           ORDER BY p.id ASC ');
         $products = $sth->fetchAll(PDO::FETCH_ASSOC);
 

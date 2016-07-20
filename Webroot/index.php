@@ -61,7 +61,7 @@ try {
     $content = Controller::renderError($e->getMessage(), $e->getCode());
 }
 
-require VIEW_DIR . 'default_layout.phtml';
+require VIEW_DIR . Controller::$layout;
 
 //echo '<hr>';
 //var_dump($route);

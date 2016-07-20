@@ -9,4 +9,8 @@ return  array(
     'contact_us' => new Route('/contact-us', 'Index', 'contact'),
     'login' => new Route('/login', 'Security', 'login'),
     'logout' => new Route('/logout', 'Security', 'logout'),
+
+    //admin routes
+    'admin_default' => new Route('/admin', 'AdminIndex', 'index'),
+    'admin_products_list' => new Route('/admin/products', 'AdminProduct', 'index'),
 );
