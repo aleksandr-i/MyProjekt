@@ -20,6 +20,8 @@ class ProductController extends Controller
         $productModel = New ProductModel();
         $product = $productModel->findId($id);
         
+        MetaHelper::addTitle($product['title']);
+        
         $args = array(
             'product' => $product
         );

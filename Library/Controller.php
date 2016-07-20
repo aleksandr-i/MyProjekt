@@ -21,6 +21,10 @@ abstract class Controller
         
         ob_start();
         require $path;
+        $content = ob_get_clean();
+
+        ob_start();
+        require VIEW_DIR .  self::$layout;
         return ob_get_clean();
     }
 
@@ -28,6 +32,10 @@ abstract class Controller
     {
         ob_start();
         require VIEW_DIR . 'error.phtml';
+        $content = ob_get_clean();
+
+        ob_start();
+        require VIEW_DIR .  self::$layout;
         return ob_get_clean();
     }
 

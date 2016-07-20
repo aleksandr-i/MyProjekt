@@ -61,7 +61,6 @@ try {
     $content = Controller::renderError($e->getMessage(), $e->getCode());
 }
 
-require VIEW_DIR . Controller::$layout;
+echo $content;
 
-//echo '<hr>';
-//var_dump($route);
+//require VIEW_DIR . Controller::$layout;
