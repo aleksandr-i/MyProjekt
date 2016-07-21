@@ -2,7 +2,7 @@
 
 class AdminProductController extends Controller
 {
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         if (!Session::has('user')){
             Router::redirect('/login');
@@ -16,5 +16,19 @@ class AdminProductController extends Controller
         );
 
         return $this->render('index', $args);
+    }
+
+    public function removeAction(Request $request)
+    {
+        if (!Session::has('user')){
+            Router::redirect('/login');
+        }
+
+        $id = $request->get('id');
+        $productModel = New ProductModel();
+        $productModel->remove($id);
+
+        Session::setFlash("Product {$id} removed");
+        Router::redirect('/admin/products');
     }
 }

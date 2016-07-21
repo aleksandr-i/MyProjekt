@@ -1,5 +1,7 @@
 <h1>PRODUCTS</h1>
 
+<b><?=Session::getFlash()?></b>
+
 <table width="100%" border="1">
     <tr>
         <td>ID</td>
@@ -15,7 +17,7 @@
             <td><?=$product['price']?></td>
             <td>
                 <a href="#">Edit</a>
-                <a href="#">Delete</a>
+                <a href="/admin/products/remove-<?=$product['id']?>">Delete</a>
             </td>
         </tr>
     <?php endforeach; ?>

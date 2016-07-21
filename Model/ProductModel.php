@@ -51,4 +51,14 @@ class ProductModel
 
         return $products;
     }
+
+    public function remove($id)
+    {
+        $db = DbConnection::getInstance()->getPdo();
+        $sth = $db->prepare('DELETE FROM product WHERE id = :id');
+        
+        $sth->execute(array(
+            'id' => $id,
+        ));
+    }
 }

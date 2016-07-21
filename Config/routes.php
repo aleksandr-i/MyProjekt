@@ -13,4 +13,5 @@ return  array(
     //admin routes
     'admin_default' => new Route('/admin', 'AdminIndex', 'index'),
     'admin_products_list' => new Route('/admin/products', 'AdminProduct', 'index'),
+    'admin_products_remove_id' => new Route('/admin/products/remove-{id}', 'AdminProduct', 'remove', array('id' => '[0-9]+')),
 );
