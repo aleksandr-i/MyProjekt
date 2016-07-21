@@ -1,0 +1,25 @@
+<h1>FEEDBACK</h1>
+
+<table width="100%" border="1">
+    <tr>
+        <td>ID</td>
+        <td>Username</td>
+        <td>Email</td>
+        <td>Message</td>
+        <td>Created</td>
+        <td>Ip_adress</td>
+    </tr>
+
+<?php foreach ($feedback as $feedback) : ?>
+    <tr>
+        <td><?= $feedback['id'] ?></td>
+        <td><?= $feedback['username'] ?></td>
+        <td><?= $feedback['email'] ?></td>
+        <td><?= $feedback['message'] ?></td>
+        <td><?= $feedback['created'] ?></td>
+        <td><?= $feedback['ip_adress'] ?></td>
+    </tr>
+<?php endforeach; ?>
+
+</table>    
+
