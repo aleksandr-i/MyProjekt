@@ -7,6 +7,7 @@
         <td>ID</td>
         <td>Title</td>
         <td>Price</td>
+        <td>Status</td>
         <td>Actions</td>
     </tr>
 
@@ -15,8 +16,9 @@
             <td><?=$product['id']?></td>
             <td><?=$product['title']?></td>
             <td><?=$product['price']?></td>
+            <td><?=$product['status']?></td>
             <td>
-                <a href="#">Edit</a>
+                <a href="/admin/products/edit-<?=$product['id']?>">Edit</a>
                 <a href="/admin/products/remove-<?=$product['id']?>">Delete</a>
             </td>
         </tr>

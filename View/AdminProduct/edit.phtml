@@ -1,0 +1,19 @@
+<h1>PRODUCT EDIT</h1>
+
+<form method="post">
+    <input type="text" name="title" value="<?=$form->title?>"> <br>
+    <input type="text" name="price" value="<?=$form->price?>"> <br>
+    <select name="category">
+        <?php foreach ($categories as $category): ?>
+            <option value="<?= $category['id'] ?>" <?=$category['id'] == $product['category_id'] ? 'selected' : '' ?> >
+                <?=$category['name']?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+
+    <textarea name="description"><?=$form->description?></textarea>
+
+    <input type="hidden" value="1" name="status">
+    
+    <button>Go</button>
+</form>

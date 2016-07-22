@@ -15,4 +15,6 @@ return  array(
     'admin_products_list' => new Route('/admin/products', 'AdminProduct', 'index'),
     'admin_products_remove_id' => new Route('/admin/products/remove-{id}', 'AdminProduct', 'remove', array('id' => '[0-9]+')),
     'admin_feedback_list' => new Route('/admin/feedback', 'AdminFeedback', 'index'),
+    'admin_products_edit' => new Route('/admin/products/edit-{id}', 'AdminProduct', 'edit', array('id' => '[0-9]+')),
+
 );

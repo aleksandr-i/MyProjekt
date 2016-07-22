@@ -31,4 +31,51 @@ class AdminProductController extends Controller
         Session::setFlash("Product {$id} removed");
         Router::redirect('/admin/products');
     }
+
+    public function editAction(Request $request)
+    {
+        if (!Session::has('user')){
+            Router::redirect('/login');
+        }
+        
+        $id = $request->get('id');
+
+        $form = New ProductForm($request);
+
+        $model = New ProductModel();
+        $categoryModel = New CategoryModel();
+        $categories = $categoryModel->findAll();
+
+        $product = $model->findId($id);
+
+        if ($request->isPost()){
+            if ($form->isValid()){
+
+                $model->update(array(
+                    'id' => $id,
+                    'title' => $form->title,
+                    'price' => $form->price,
+                    'description' => $form->description,
+                    'category_id' => $form->category,
+                    'status' => 1,
+                ));
+                Session::setFlash('Saved');
+                Router::redirect('/admin/products');
+            }
+
+        } else {
+            $form->setFromArray($product);
+        }
+
+        $args = array(
+          'form' => $form,
+          'categories' => $categories, 
+          'product' => $product,
+        );
+
+
+        return $this->render('edit', $args);
+    }
+    
+    
 }

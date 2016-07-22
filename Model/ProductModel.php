@@ -35,7 +35,7 @@ class ProductModel
     public function findId($id)
     {
         $db = DbConnection::getInstance()->getPdo();
-        $sth = $db->prepare('SELECT p.id, p. title, p.description, p.price, p.status, c.name AS category
+        $sth = $db->prepare('SELECT p.id, p. title, p.description, p.price, p.status, p.category_id, c.name AS category
                             FROM product p JOIN category c ON p.category_id = c.id
                             WHERE p.id = :number');
 
@@ -60,5 +60,21 @@ class ProductModel
         $sth->execute(array(
             'id' => $id,
         ));
+    }
+
+    public function update(array $product) // update/save
+    {
+        //todo: check if array has keys title, price
+
+        $db = DbConnection::getInstance()->getPdo();
+        $sql = 'UPDATE product SET 
+                title = :title, 
+                price = :price, 
+                description = :description, 
+                category_id = :category_id, 
+                status = :status 
+                WHERE  id = :id';
+        $sth = $db->prepare($sql);
+        $sth->execute($product);
     }
 }
