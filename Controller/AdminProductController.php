@@ -37,15 +37,12 @@ class AdminProductController extends Controller
         if (!Session::has('user')){
             Router::redirect('/login');
         }
-        
+
         $id = $request->get('id');
-
         $form = New ProductForm($request);
-
         $model = New ProductModel();
         $categoryModel = New CategoryModel();
         $categories = $categoryModel->findAll();
-
         $product = $model->findId($id);
 
         if ($request->isPost()){
@@ -59,9 +56,12 @@ class AdminProductController extends Controller
                     'category_id' => $form->category,
                     'status' => 1,
                 ));
+
                 Session::setFlash('Saved');
                 Router::redirect('/admin/products');
             }
+
+            Session::setFlash('Fill the fields');
 
         } else {
             $form->setFromArray($product);

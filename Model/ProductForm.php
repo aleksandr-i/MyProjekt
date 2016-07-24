@@ -7,6 +7,15 @@ class ProductForm
     public $description;
     public $category;
 
+    /**
+     * @var UploadedFile
+     */
+    public $attachment;
+
+    /**
+    * ContactForm constructor.
+    * @param Request $request
+    */
 
     public function __construct(Request $request)
     {
@@ -14,7 +23,7 @@ class ProductForm
         $this->price = $request->post('price');
         $this->description = $request->post('description');
         $this->category = $request->post('category');
-
+        $this->attachment = $request->files('document'); // $_FILES[''document];
     }
 
     /**
@@ -25,7 +34,8 @@ class ProductForm
     public function isValid()
     {
         $res = $this->title !== '' && $this->price !== '' && $this->description !== '';
-
+        
+        //$res = $res && $this->attachment->isImage();
         return $res;
     }
 
